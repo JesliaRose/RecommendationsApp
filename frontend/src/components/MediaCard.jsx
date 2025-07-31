@@ -39,9 +39,12 @@ const MediaCard = ({ title, person, genre, description, posterUrl, type }) => {
         <p className="media-person">
           {type === "book" ? "Author" : "Director"}: <span>{person}</span>
         </p>
-        <p className="media-genre">{genre}</p>
         <p className="media-description">{description}</p>
-        <p className="media-rating">Rating: {rating}</p>
+        <div className="media-info-row">
+          <p className="media-rating">Rating: {rating}</p>
+          <p className="media-genre">{genre}</p>
+        </div>
+        <button className="btn-watchlist">Add to Watchlist</button>
       </div>
     </div>
   );

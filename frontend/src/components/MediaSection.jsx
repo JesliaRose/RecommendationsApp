@@ -1,32 +1,35 @@
+import { Link } from "react-router-dom";
 import MediaCard from "./MediaCard";
 import "../styles/MediaSection.css";
 
 const MediaSection = ({ title, items, type }) => {
+  const pathMap = {
+    movie: "/movies",
+    tv: "/tvshows",
+    book: "/books"
+  };
+
   return (
     <section className="media-section">
-      <h2 className="section-title">{title}</h2>
-      <div className="media-scroll-container">
-        {items.map((item, index) => {
-          if (item.viewAll) {
-            return (
-              <div className="view-all-card" key={`viewall-${index}`}>
-                <p>View All</p>
-              </div>
-            );
-          }
+      <div className="section-header">
+        <h2 className="section-title">{title}</h2>
+        <Link to={pathMap[type]} className="view-all-link">
+          View All →
+        </Link>
+      </div>
 
-          return (
-            <MediaCard
-              key={index}
-              title={item.name}
-              person={item.creator}
-              genre={item.genre}
-              description={item.description}
-              posterUrl={item.posterUrl}
-              type={type}
-            />
-          );
-        })}
+      <div className="media-scroll-container">
+        {items.slice(0, 5).map((item, index) => (
+          <MediaCard
+            key={index}
+            title={item.name}
+            person={item.creator}
+            genre={item.genre}
+            description={item.description}
+            posterUrl={item.posterUrl}
+            type={type}
+          />
+        ))}
       </div>
     </section>
   );

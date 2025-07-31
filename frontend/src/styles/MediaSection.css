@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 .media-section {
   margin: 40px 20px;
 }
@@ -6,13 +8,14 @@
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 16px;
-  color: #222;
+  color: #ffffff;
+  font-family: "poppins";
 }
 
 .media-scroll-container {
   display: flex;
   overflow-x: auto;
-  gap: 20px;
+  gap: 30px;
   padding-bottom: 10px;
 }
 
@@ -24,20 +27,25 @@
   border-radius: 10px;
 }
 
-.view-all-card {
-  min-width: 260px;
-  height: 400px;
-  background-color: #f0f0f0;
-  border-radius: 16px;
+.section-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  margin: 1rem 0;
 }
 
-.view-all-card:hover {
-  background-color: #e0e0e0;
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.view-all-link {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #A06CD5;
+  transition: color 0.2s;
+}
+
+.view-all-link:hover {
+  color: #6247AA;
 }
