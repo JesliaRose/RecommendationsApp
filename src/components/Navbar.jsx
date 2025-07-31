@@ -27,9 +27,11 @@ export default function Navbar() {
           margin: 0, 
           padding: 0 
         }}>
-          <li><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link></li>
-          <li><Link to="/interests" style={{ color: 'white', textDecoration: 'none' }}>Recommendations</Link></li>
-          <li><Link to="/dashboard" style={{ color: 'white', textDecoration: 'none' }}>Dashboard</Link></li>
+            <li><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link></li>
+            <li><Link to="/interests" style={{ color: 'white', textDecoration: 'none' }}>Recommendations</Link></li>
+            <li><Link to="/dashboard" style={{ color: 'white', textDecoration: 'none' }}>Dashboard</Link></li>
+            <li><Link to="/login">Login</Link></li>
+
         </ul>
 
         <div 
