@@ -7,7 +7,7 @@ import { faTv } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "../components/Navbar.jsx";
 import "../styles/Dashboard.css";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#AA336A"];
+const COLORS = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40", "#2ECC71", "#E74C3C", "#3498DB", "#8E44AD", "#27AE60", "#E67E22", "#7F8C8D", "#9ba36aff"];
 
 const Dashboard = () => {
   const [activity, setActivity] = useState([]);
