@@ -8,6 +8,7 @@ import AllMovies from "./components/AllMovies.jsx";
 import AllTvShows from "./components/AllTvShows.jsx";
 import AllBooks from "./components/AllBooks.jsx";
 import Dashboard from "./pages/dashboard.jsx";
+import ManageProfiles from "./pages/ManageProfiles.jsx";
 import "./App.css";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         path="/books"
         element={<AllBooks items={books} type="book" />}
       />
+      <Route path="/profile" element = {<ManageProfiles />} />
     </Routes>
   );
 }

@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { faClapperboard } from "@fortawesome/free-solid-svg-icons";
+import { faTv } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "../components/Navbar.jsx";
 import "../styles/Dashboard.css";
 
@@ -10,61 +14,23 @@ const Dashboard = () => {
   const [categoryStats, setCategoryStats] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      // This could be replaced with an API call like: await fetch('/api/user/activity')
-      const response = await Promise.resolve({
-        userId: "123",
-        activity: [
-          {
-            type: "movie",
-            title: "Inception",
-            category: "Sci-Fi",
-            watchedAt: "2025-07-28",
-          },
-          {
-            type: "book",
-            title: "1984",
-            category: "Dystopian",
-            watchedAt: "2025-07-27",
-          },
-          {
-            type: "movie",
-            title: "Matrix",
-            category: "Sci-Fi",
-            watchedAt: "2025-07-25",
-          },
-          {
-            type: "book",
-            title: "Brave New World",
-            category: "Dystopian",
-            watchedAt: "2025-07-24",
-          },
-          {
-            type: "movie",
-            title: "Interstellar",
-            category: "Sci-Fi",
-            watchedAt: "2025-07-23",
-          },
-          {
-            type: "book",
-            title: "The Alchemist",
-            category: "Fiction",
-            watchedAt: "2025-07-22",
-          },
-        ],
-      });
-      setActivity(response.activity);
+    const fetchData = () => {
+      const stored = JSON.parse(localStorage.getItem("watchlist")) || [];
+      setActivity(stored);
 
       const stats = {};
-      response.activity.forEach((item) => {
-        stats[item.category] = (stats[item.category] || 0) + 1;
+      stored.forEach((item) => {
+        const key = item.genre; 
+        stats[key] = (stats[key] || 0) + 1;
       });
+
       const formatted = Object.entries(stats).map(([category, count]) => ({
         category,
         count,
       }));
       setCategoryStats(formatted);
     };
+
     fetchData();
   }, []);
 
@@ -110,12 +76,14 @@ const Dashboard = () => {
         <div className="history-container">
           <h2>Watch/Read History</h2>
           <ul className="history-list">
-            {activity.map((item, index) => (
+            {activity.slice().reverse().map((item, index) => (
               <li key={index} className="history-item">
-                <span>
-                  {item.title} ({item.type})
+                <span className="history-list-items">
+                  {item.type==='movie' && <FontAwesomeIcon icon={faClapperboard} />}
+                  {item.type==='tv' && <FontAwesomeIcon icon={faTv} />}
+                  {item.type==='book' && <FontAwesomeIcon icon={faBook} />} 
+                  {item.title} - {item.genre}
                 </span>
-                <span className="date">{item.watchedAt}</span>
               </li>
             ))}
           </ul>

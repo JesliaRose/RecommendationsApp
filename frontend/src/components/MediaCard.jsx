@@ -45,6 +45,30 @@ const MediaCard = ({ title, person, genre, description, posterUrl, type }) => {
     fetchData();
   }, [title, person, type, posterUrl]);
 
+  const handleAddToWatchlist = () => {
+    const item = {
+      title,
+      genre,
+      type,
+      addedAt: new Date().toISOString().split("T")[0], // Today's date
+    };
+
+    // Get current list
+    const stored = JSON.parse(localStorage.getItem("watchlist")) || [];
+
+    // Check if already added to avoid duplicates
+    const exists = stored.some(
+      (entry) => entry.title === item.title && entry.type === item.type
+    );
+    if (!exists) {
+      stored.push(item);
+      localStorage.setItem("watchlist", JSON.stringify(stored));
+      alert("Added to Watchlist ✅");
+    } else {
+      alert("Already in Watchlist ❗");
+    }
+  };
+
   return (
     <div className="media-card">
       {poster ? (
@@ -63,7 +87,7 @@ const MediaCard = ({ title, person, genre, description, posterUrl, type }) => {
           <p className="media-rating">Rating: {rating}</p>
           <p className="media-genre">{genre}</p>
         </div>
-        <button className="btn-watchlist">Add to Watchlist</button>
+        <button className="btn-watchlist" onClick={handleAddToWatchlist}>Add to Watchlist</button>
       </div>
     </div>
   );

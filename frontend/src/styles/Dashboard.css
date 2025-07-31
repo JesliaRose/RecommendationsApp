@@ -37,3 +37,9 @@
   color: #4b4b4b;
   font-size: 0.9rem;
 }
+
+.history-list-items{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
