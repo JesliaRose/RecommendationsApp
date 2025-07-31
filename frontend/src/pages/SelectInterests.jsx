@@ -5,7 +5,7 @@ import '../styles/SelectInterests.css';
 const categories = ["Movies", "TV Shows", "Books"];
 const genres = [
   "Fiction", "Mystery", "Romance", "Sci-Fi", "Fantasy",
-  "Horror", "Adventure", "Comedy", "Biography", "History"
+  "Action", "Horror", "Drama", "Adventure", "Comedy", "Thriller", "Crime", "Biography", "History"
 ];
 
 export default function SelectInterests() {
