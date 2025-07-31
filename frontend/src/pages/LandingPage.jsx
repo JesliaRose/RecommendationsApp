@@ -1,6 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Play, BookOpen, Tv, Headphones, Brain, TrendingUp, ArrowRight, Sparkles, Heart, Zap, Shield, Clock, Target } from 'lucide-react';
-import '../styles/LandingPage.css';
+import React, { useState, useEffect } from "react";
+import {
+  Play,
+  BookOpen,
+  Tv,
+  Headphones,
+  Brain,
+  TrendingUp,
+  ArrowRight,
+  Sparkles,
+  Heart,
+  Zap,
+  Shield,
+  Clock,
+  Target,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import "../styles/LandingPage.css";
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,7 +24,7 @@ const LandingPage = () => {
   useEffect(() => {
     setIsVisible(true);
     const interval = setInterval(() => {
-      setActiveFeature(prev => (prev + 1) % 3);
+      setActiveFeature((prev) => (prev + 1) % 3);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -18,28 +33,30 @@ const LandingPage = () => {
     {
       icon: Brain,
       title: "AI-Powered Recommendations",
-      description: "Advanced machine learning algorithms analyze your preferences to suggest content you'll love",
-      gradient: "purple-pink"
+      description:
+        "Advanced machine learning algorithms analyze your preferences to suggest content you'll love",
+      gradient: "purple-pink",
     },
     {
       icon: Target,
       title: "Personalized Discovery",
-      description: "Every recommendation is tailored to your unique taste profile and viewing history",
-      gradient: "blue-cyan"
+      description:
+        "Every recommendation is tailored to your unique taste profile and viewing history",
+      gradient: "blue-cyan",
     },
     {
       icon: TrendingUp,
       title: "Smart Analytics",
-      description: "Track your content journey with detailed insights and preference evolution",
-      gradient: "emerald-teal"
-    }
+      description:
+        "Track your content journey with detailed insights and preference evolution",
+      gradient: "emerald-teal",
+    },
   ];
 
   const contentTypes = [
     { icon: BookOpen, label: "Books", color: "amber" },
     { icon: Tv, label: "TV Shows", color: "blue" },
     { icon: Play, label: "Movies", color: "red" },
-    
   ];
 
   return (
@@ -60,28 +77,31 @@ const LandingPage = () => {
             </div>
             <span className="brand-text">Pixelites</span>
           </div>
-          
         </div>
       </nav>
 
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-container">
-          <div className={`hero-content ${isVisible ? 'visible' : ''}`}>
+          <div className={`hero-content ${isVisible ? "visible" : ""}`}>
             <h1 className="hero-title">
               Discover Your Next
               <br />
               <span className="hero-title-accent">Obsession</span>
             </h1>
             <p className="hero-subtitle">
-              AI-powered content recommendations that understand your taste better than you do. 
-              Find books, shows, movies, and podcasts tailored perfectly to your preferences.
+              AI-powered content recommendations that understand your taste
+              better than you do. Find books, shows, movies, and podcasts
+              tailored perfectly to your preferences.
             </p>
-            
+
             {/* Content type badges */}
             <div className="content-types">
               {contentTypes.map((type, index) => (
-                <div key={index} className={`content-type-badge content-type-${type.color}`}>
+                <div
+                  key={index}
+                  className={`content-type-badge content-type-${type.color}`}
+                >
                   <type.icon size={20} />
                   <span>{type.label}</span>
                 </div>
@@ -90,7 +110,9 @@ const LandingPage = () => {
 
             <div className="hero-actions">
               <button className="primary-button">
-                <span>Start Discovering</span>
+                <Link to="/login" className="to-login">
+                  <span>Start Discovering</span>
+                </Link>
                 <ArrowRight size={20} />
               </button>
               <button className="secondary-button">Watch Demo</button>
@@ -105,17 +127,23 @@ const LandingPage = () => {
           <div className="section-header">
             <h2 className="section-title">Powered by Intelligence</h2>
             <p className="section-subtitle">
-              Our advanced AI doesn't just recommend content—it understands your evolving tastes and discovers hidden gems you never knew you wanted.
+              Our advanced AI doesn't just recommend content—it understands your
+              evolving tastes and discovers hidden gems you never knew you
+              wanted.
             </p>
           </div>
 
           <div className="features-grid">
             {features.map((feature, index) => (
-              <div 
-                key={index} 
-                className={`feature-card ${activeFeature === index ? 'active' : ''}`}
+              <div
+                key={index}
+                className={`feature-card ${
+                  activeFeature === index ? "active" : ""
+                }`}
               >
-                <div className={`feature-icon feature-icon-${feature.gradient}`}>
+                <div
+                  className={`feature-icon feature-icon-${feature.gradient}`}
+                >
                   <feature.icon size={32} />
                 </div>
                 <h3 className="feature-title">{feature.title}</h3>
@@ -138,9 +166,21 @@ const LandingPage = () => {
             <div className="connection-line connection-line-2"></div>
 
             {[
-              { icon: Heart, title: "Share Your Taste", desc: "Tell us what you love, rate content, and let our AI learn your preferences" },
-              { icon: Brain, title: "AI Analysis", desc: "Our intelligent engine processes your data and finds patterns in your preferences" },
-              { icon: Sparkles, title: "Get Recommendations", desc: "Receive personalized suggestions that match your unique taste profile perfectly" }
+              {
+                icon: Heart,
+                title: "Share Your Taste",
+                desc: "Tell us what you love, rate content, and let our AI learn your preferences",
+              },
+              {
+                icon: Brain,
+                title: "AI Analysis",
+                desc: "Our intelligent engine processes your data and finds patterns in your preferences",
+              },
+              {
+                icon: Sparkles,
+                title: "Get Recommendations",
+                desc: "Receive personalized suggestions that match your unique taste profile perfectly",
+              },
             ].map((step, index) => (
               <div key={index} className="step-card">
                 <div className="step-icon">
@@ -161,7 +201,8 @@ const LandingPage = () => {
           <div className="cta-card">
             <h2 className="cta-title">Transform Your Discovery</h2>
             <p className="cta-subtitle">
-              Experience personalized content recommendations that evolve with your taste and help you discover your next favorite obsession.
+              Experience personalized content recommendations that evolve with
+              your taste and help you discover your next favorite obsession.
             </p>
             <div className="trust-badges">
               <div className="trust-badge">
@@ -187,13 +228,22 @@ const LandingPage = () => {
             <span className="brand-text">Pixelites</span>
           </div>
           <p className="footer-tagline">
-            Discover content that speaks to your soul, powered by artificial intelligence.
+            Discover content that speaks to your soul, powered by artificial
+            intelligence.
           </p>
           <div className="footer-links">
-            <a href="#" className="footer-link">Privacy Policy</a>
-            <a href="#" className="footer-link">Terms of Service</a>
-            <a href="#" className="footer-link">Contact</a>
-            <a href="#" className="footer-link">About</a>
+            <a href="#" className="footer-link">
+              Privacy Policy
+            </a>
+            <a href="#" className="footer-link">
+              Terms of Service
+            </a>
+            <a href="#" className="footer-link">
+              Contact
+            </a>
+            <a href="#" className="footer-link">
+              About
+            </a>
           </div>
         </div>
       </footer>

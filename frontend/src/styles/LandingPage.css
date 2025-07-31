@@ -630,3 +630,7 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #9333ea, #db2777);
 }
+
+.to-login{
+  color: #e2e8f0;
+}

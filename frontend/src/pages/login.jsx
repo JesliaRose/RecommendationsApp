@@ -25,7 +25,6 @@ const Login = () => {
 
 const styles = {
   container: {
-    backgroundColor: "#121212",
     height: "100vh",
     display: "flex",
     justifyContent: "center",
