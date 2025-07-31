@@ -71,6 +71,13 @@ h2 {
   cursor: not-allowed;
 }
 
+.media-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 20px;
+  padding: 10px;
+}
+
 @media (max-width: 768px) {
   .interests-card {
     padding: 20px 15px;

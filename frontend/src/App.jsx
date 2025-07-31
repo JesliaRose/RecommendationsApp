@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import SelectInterests from "./pages/SelectInterests.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
+import Login from "./pages/login.jsx";
 import Home from "./pages/Home.jsx";
 import content from "./data/content.json";
 import AllMovies from "./components/AllMovies.jsx";
@@ -16,7 +18,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<div>Landing Page</div>} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/interests" element={<SelectInterests />} />
       <Route path="/home" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
