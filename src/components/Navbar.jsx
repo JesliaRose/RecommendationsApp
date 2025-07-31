@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { FaUserCircle } from "react-icons/fa";
 
 export default function Navbar() {
   return (
@@ -34,14 +35,25 @@ export default function Navbar() {
 
         </ul>
 
-        <div 
-          style={{ 
-            width: '35px', 
-            height: '35px', 
-            borderRadius: '50%', 
-            backgroundColor: '#888',
-          }}
-        ></div>
+        <Link to="/ManageProfiles" style={{ textDecoration: 'none' }}>
+  <div 
+    style={{ 
+      width: '35px', 
+      height: '35px', 
+      borderRadius: '50%', 
+      backgroundColor: '#888',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'white',
+      fontSize: '20px',
+      cursor: 'pointer'
+    }}
+  >
+    <FaUserCircle />
+  </div>
+</Link>
+
       </div>
     </nav>
   )
