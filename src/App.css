@@ -74,10 +74,18 @@ nav {
 }
 
 
+<<<<<<< HEAD:src/App.css
 body {
+=======
+/* body {
+>>>>>>> 9c484678df3a2706989683889c6ab05afe1c4d29:frontend/src/App.css
   background-color: white;
   color: black;
   margin: 0;
   font-family: sans-serif;
   padding-top: 60px;
+<<<<<<< HEAD:src/App.css
 }
+=======
+} */
+>>>>>>> 9c484678df3a2706989683889c6ab05afe1c4d29:frontend/src/App.css
