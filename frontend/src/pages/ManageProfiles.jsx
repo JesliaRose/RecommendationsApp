@@ -1,5 +1,6 @@
 // src/pages/ManageProfiles.jsx
 import React, { useState } from "react";
+import Navbar from "../components/Navbar";
 
 const initialProfiles = [
   { name: "You", type: "Adult", color: "#3498db" },
@@ -26,6 +27,7 @@ export default function ManageProfiles() {
 
   return (
     <div className="min-h-screen bg-[#111] text-white p-8">
+      <Navbar />
       <h1 className="text-3xl font-bold mb-6">Manage Profiles</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">

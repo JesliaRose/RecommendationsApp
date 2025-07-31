@@ -1,95 +1,94 @@
 import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
-import Navbar from '../components/Navbar.jsx'; 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { faClapperboard } from "@fortawesome/free-solid-svg-icons";
+import { faTv } from "@fortawesome/free-solid-svg-icons";
+import Navbar from "../components/Navbar.jsx";
+import "../styles/Dashboard.css";
 
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#AA336A"];
+const COLORS = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40", "#2ECC71", "#E74C3C", "#3498DB", "#8E44AD", "#27AE60", "#E67E22", "#7F8C8D", "#9ba36aff"];
 
 const Dashboard = () => {
   const [activity, setActivity] = useState([]);
   const [categoryStats, setCategoryStats] = useState([]);
 
-  
   useEffect(() => {
-    const fetchData = async () => {
-      // This could be replaced with an API call like: await fetch('/api/user/activity')
-      const response = await Promise.resolve({
-        userId: "123",
-        activity: [
-          { type: "movie", title: "Inception", category: "Sci-Fi", watchedAt: "2025-07-28" },
-          { type: "book", title: "1984", category: "Dystopian", watchedAt: "2025-07-27" },
-          { type: "movie", title: "Matrix", category: "Sci-Fi", watchedAt: "2025-07-25" },
-          { type: "book", title: "Brave New World", category: "Dystopian", watchedAt: "2025-07-24" },
-          { type: "movie", title: "Interstellar", category: "Sci-Fi", watchedAt: "2025-07-23" },
-          { type: "book", title: "The Alchemist", category: "Fiction", watchedAt: "2025-07-22" },
-        ],
-      });
-      setActivity(response.activity);
+    const fetchData = () => {
+      const stored = JSON.parse(localStorage.getItem("watchlist")) || [];
+      setActivity(stored);
 
-      
       const stats = {};
-      response.activity.forEach((item) => {
-        stats[item.category] = (stats[item.category] || 0) + 1;
+      stored.forEach((item) => {
+        const key = item.genre; 
+        stats[key] = (stats[key] || 0) + 1;
       });
+
       const formatted = Object.entries(stats).map(([category, count]) => ({
         category,
         count,
       }));
       setCategoryStats(formatted);
     };
+
     fetchData();
   }, []);
 
   return (
     <div>
-    <Navbar/>
-    <div style={{ padding: "1rem" }}>
-      <h1>Dashboard</h1>
+      <Navbar />
+      <div style={{ padding: "1rem" }}>
+        <h2>Dashboard</h2>
       </div>
-  
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Your Dashboard</h1>
 
       {/* Category Pie Chart */}
-      <div className="w-full h-72 mb-6">
-        <h2 className="text-xl font-semibold mb-2">Most Watched Categories</h2>
-        <ResponsiveContainer>
-          <PieChart>
-            <Pie
-              data={categoryStats}
-              dataKey="count"
-              nameKey="category"
-              cx="50%"
-              cy="50%"
-              outerRadius={80}
-              fill="#8884d8"
-              label
-            >
-              {categoryStats.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
+      <div className="dashboard-container">
+        {/* Pie Chart */}
+        <div className="chart-container">
+          <h2>Most Watched Categories</h2>
+          <div className="chart-box">
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={categoryStats}
+                  dataKey="count"
+                  nameKey="category"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={80}
+                  fill="#8884d8"
+                  label
+                >
+                  {categoryStats.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
 
-      {/* History Timeline */}
-      <div>
-        <h2 className="text-xl font-semibold mb-2">Watch/Read History</h2>
-        <ul className="space-y-2">
-          {activity.map((item, index) => (
-            <li
-              key={index}
-              className="bg-gray-100 p-3 rounded-md shadow-sm flex justify-between"
-            >
-              <span>{item.title} ({item.type})</span>
-              <span className="text-sm text-gray-600">{item.watchedAt}</span>
-            </li>
-          ))}
-        </ul>
+        {/* History */}
+        <div className="history-container">
+          <h2>Watch/Read History</h2>
+          <ul className="history-list">
+            {activity.slice().reverse().map((item, index) => (
+              <li key={index} className="history-item">
+                <span className="history-list-items">
+                  {item.type==='movie' && <FontAwesomeIcon icon={faClapperboard} />}
+                  {item.type==='tv' && <FontAwesomeIcon icon={faTv} />}
+                  {item.type==='book' && <FontAwesomeIcon icon={faBook} />} 
+                  {item.title} - {item.genre}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

@@ -68,6 +68,106 @@
     "genre": "Romance"
   },
   {
+    "type": "movie",
+    "name": "Fight Club",
+    "genre": "Drama"
+  },
+  {
+    "type": "movie",
+    "name": "The Matrix",
+    "genre": "Sci-Fi"
+  },
+  {
+    "type": "movie",
+    "name": "Gladiator",
+    "genre": "Action"
+  },
+  {
+    "type": "movie",
+    "name": "La La Land",
+    "genre": "Romance"
+  },
+  {
+    "type": "movie",
+    "name": "Get Out",
+    "genre": "Thriller"
+  },
+  {
+    "type": "movie",
+    "name": "The Grand Budapest Hotel",
+    "genre": "Comedy"
+  },
+  {
+    "type": "movie",
+    "name": "Spirited Away",
+    "genre": "Fantasy"
+  },
+  {
+    "type": "movie",
+    "name": "The Revenant",
+    "genre": "Adventure"
+  },
+  {
+    "type": "movie",
+    "name": "Her",
+    "genre": "Sci-Fi"
+  },
+  {
+    "type": "movie",
+    "name": "Black Swan",
+    "genre": "Thriller"
+  },
+   {
+    "type": "movie",
+    "name": "Whiplash",
+    "genre": "Drama"
+  },
+  {
+    "type": "movie",
+    "name": "The Social Network",
+    "genre": "Biography"
+  },
+  {
+    "type": "movie",
+    "name": "Mad Max: Fury Road",
+    "genre": "Action"
+  },
+  {
+    "type": "movie",
+    "name": "Coco",
+    "genre": "Fantasy"
+  },
+  {
+    "type": "movie",
+    "name": "The Prestige",
+    "genre": "Mystery"
+  },
+  {
+    "type": "movie",
+    "name": "1917",
+    "genre": "War"
+  },
+  {
+    "type": "movie",
+    "name": "Arrival",
+    "genre": "Sci-Fi"
+  },
+  {
+    "type": "movie",
+    "name": "Knives Out",
+    "genre": "Mystery"
+  },
+  {
+    "type": "movie",
+    "name": "The Pursuit of Happyness",
+    "genre": "Drama"
+  },
+  {
+    "type": "movie",
+    "name": "A Silent Voice",
+    "genre": "Animation"
+  },
+  {
     "type": "tv",
     "name": "Breaking Bad",
     "creator": "Vince Gilligan",
@@ -145,6 +245,106 @@
     "genre": "Fiction"
   },
   {
+    "type": "tv",
+    "name": "The Boys",
+    "genre": "Action"
+  },
+  {
+    "type": "tv",
+    "name": "Dark",
+    "genre": "Sci-Fi"
+  },
+  {
+    "type": "tv",
+    "name": "Black Mirror",
+    "genre": "Sci-Fi"
+  },
+  {
+    "type": "tv",
+    "name": "The Witcher",
+    "genre": "Fantasy"
+  },
+  {
+    "type": "tv",
+    "name": "Better Call Saul",
+    "genre": "Crime"
+  },
+  {
+    "type": "tv",
+    "name": "How I Met Your Mother",
+    "genre": "Comedy"
+  },
+  {
+    "type": "tv",
+    "name": "Brooklyn Nine-Nine",
+    "genre": "Comedy"
+  },
+  {
+    "type": "tv",
+    "name": "Lucifer",
+    "genre": "Crime"
+  },
+  {
+    "type": "tv",
+    "name": "Mindhunter",
+    "genre": "Thriller"
+  },
+  {
+    "type": "tv",
+    "name": "Vikings",
+    "genre": "Action"
+  },
+  {
+    "type": "tv",
+    "name": "The Last of Us",
+    "genre": "Drama"
+  },
+  {
+    "type": "tv",
+    "name": "Narcos",
+    "genre": "Crime"
+  },
+  {
+    "type": "tv",
+    "name": "The Haunting of Hill House",
+    "genre": "Horror"
+  },
+  {
+    "type": "tv",
+    "name": "The Umbrella Academy",
+    "genre": "Superhero"
+  },
+  {
+    "type": "tv",
+    "name": "House of the Dragon",
+    "genre": "Fantasy"
+  },
+  {
+    "type": "tv",
+    "name": "Wednesday",
+    "genre": "Mystery"
+  },
+  {
+    "type": "tv",
+    "name": "The Good Place",
+    "genre": "Fantasy"
+  },
+  {
+  "type": "tv",
+  "name": "Suits",
+  "genre": "Drama"
+  },
+  {
+    "type": "tv",
+    "name": "The Queen's Gambit",
+    "genre": "Drama"
+  },
+  {
+    "type": "tv",
+    "name": "Severance",
+    "genre": "Mystery"
+  },
+  {
     "type": "book",
     "name": "Pride and Prejudice",
     "creator": "Jane Austen",
@@ -206,5 +406,80 @@
     "creator": "Jojo Moyes",
     "description": "A woman bonds with a quadriplegic man.",
     "genre": "Romance"
+  },
+  {
+    "type": "book",
+    "name": "The Catcher in the Rye",
+    "genre": "Fiction"
+  },
+  {
+    "type": "book",
+    "name": "The Great Gatsby",
+    "genre": "Fiction"
+  },
+  {
+    "type": "book",
+    "name": "The Book Thief",
+    "genre": "History"
+  },
+  {
+    "type": "book",
+    "name": "Gone Girl",
+    "genre": "Thriller"
+  },
+  {
+    "type": "book",
+    "name": "The Fault in Our Stars",
+    "genre": "Romance"
+  },
+  {
+    "type": "book",
+    "name": "A Game of Thrones",
+    "genre": "Fantasy"
+  },
+  {
+    "type": "book",
+    "name": "The Girl on the Train",
+    "genre": "Mystery"
+  },
+  {
+    "type": "book",
+    "name": "The Kite Runner",
+    "genre": "Fiction"
+  },
+  {
+    "type": "book",
+    "name": "It Ends with Us",
+    "genre": "Romance"
+  },
+  {
+    "type": "book",
+    "name": "The Silent Patient",
+    "genre": "Thriller"
+  },
+  {
+    "type": "book",
+    "name": "Little Women",
+    "genre": "Fiction"
+  },
+  {
+    "type": "book",
+    "name": "Dune",
+    "genre": "Sci-Fi"
+  },
+  {
+    "type": "book",
+    "name": "Norwegian Wood",
+    "genre": "Romance"
+  },
+  {
+    "type": "book",
+    "name": "The Midnight Library",
+    "genre": "Fantasy"
+  },
+  {
+    "type": "book",
+    "name": "A Man Called Ove",
+    "genre": "Fiction"
   }
 ]
