@@ -46,8 +46,8 @@ export const fetchTMDBPoster = async (title, type = "movie") => {
     const finalData = {
       posterUrl: result.poster_path
         ? `https://image.tmdb.org/t/p/w500${result.poster_path}`
-        : '',
-      rating: result.vote_average?.toFixed(1) ?? 'N/A',
+        : "",
+      rating: result.vote_average?.toFixed(1) ?? "N/A",
       description,
       creator,
     };
@@ -55,52 +55,77 @@ export const fetchTMDBPoster = async (title, type = "movie") => {
     console.log(`[TMDB FINAL DATA] ${type} - ${title}:`, finalData);
     return finalData;
   } catch (err) {
-    console.error('[TMDB ERROR]:', err);
+    console.error("[TMDB ERROR]:", err);
     return {
-      posterUrl: '',
-      rating: 'N/A',
-      description: 'N/A',
-      creator: 'N/A',
+      posterUrl: "",
+      rating: "N/A",
+      description: "N/A",
+      creator: "N/A",
     };
   }
 };
 
 export const fetchBookCover = async (title, author) => {
   try {
-    const response = await fetch(
+    const searchResponse = await fetch(
       `https://openlibrary.org/search.json?title=${encodeURIComponent(
         title
       )}&author=${encodeURIComponent(author)}`
     );
-    const data = await response.json();
+    const searchData = await searchResponse.json();
 
-    if (!data.docs || data.docs.length === 0) {
+    if (!searchData.docs || searchData.docs.length === 0) {
       console.warn(`No books found for: ${title} by ${author}`);
       return {
-        posterUrl: "", // fallback
-        rating: "N/A",
-      };
-    }
-
-    const firstMatch = data.docs[0];
-
-    if (firstMatch.cover_i) {
-      const coverUrl = `https://covers.openlibrary.org/b/id/${firstMatch.cover_i}-L.jpg`;
-      return {
-        posterUrl: coverUrl,
-        rating: "N/A",
-      };
-    } else {
-      console.warn(`No cover_i found for: ${title}`);
-      return {
         posterUrl: "",
+        description: "No description available.",
         rating: "N/A",
       };
     }
+
+    const firstMatch = searchData.docs[0];
+    const workKey = firstMatch.key;
+
+    console.log("✅ First match:", firstMatch);
+    console.log("🔑 Work key:", workKey);
+
+    let description = "No description available.";
+    if (workKey) {
+      const workResponse = await fetch(
+        `https://openlibrary.org${workKey}.json`
+      );
+      const workData = await workResponse.json();
+
+      if (workData?.description) {
+        description =
+          typeof workData.description === "string"
+            ? workData.description
+            : workData.description.value || description;
+      }
+    }
+
+    // Build poster URL
+    const posterUrl = firstMatch.cover_i
+      ? `https://covers.openlibrary.org/b/id/${firstMatch.cover_i}-L.jpg`
+      : "";
+
+    console.log("🖼️ Poster URL:", posterUrl);
+    console.log("📦 Final book object:", {
+      posterUrl,
+      description,
+      rating: "N/A",
+    });
+
+    return {
+      posterUrl,
+      description,
+      rating: "N/A",
+    };
   } catch (error) {
-    console.error("Error fetching book cover:", error);
+    console.error("Error fetching book data:", error);
     return {
       posterUrl: "",
+      description: "Error fetching description.",
       rating: "N/A",
     };
   }

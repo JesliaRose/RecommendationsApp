@@ -17,12 +17,26 @@ const MediaCard = ({ title, person, genre, description, posterUrl, type }) => {
             await fetchTMDBPoster(title, type);
           setPoster(posterUrl);
           setRating(rating);
-          setDesc(description);
+          const periodIndex = description.indexOf(".");
+          const trimmed =
+            periodIndex !== -1
+              ? description.slice(0, periodIndex + 1)
+              : description;
+          setDesc(trimmed);
           setCreator(creator);
         } else if (type === "book") {
           console.log("Book Info:", { title, person, type });
-          const { posterUrl, rating } = await fetchBookCover(title, person);
+          const { posterUrl, rating, description } = await fetchBookCover(
+            title,
+            person
+          );
           setPoster(posterUrl);
+          const periodIndex = description.indexOf(".");
+          const trimmed =
+            periodIndex !== -1
+              ? description.slice(0, periodIndex + 1)
+              : description;
+          setDesc(trimmed);
           setRating(rating);
         }
       }

@@ -1,0 +1,11 @@
+.movies-scroll-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 20px;
+  padding: 10px;
+}
+
+.back-to-home{
+    color: #A06CD5;
+    padding: 20px;
+}

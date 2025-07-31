@@ -10,21 +10,9 @@ const Home = () => {
   return (
     <div>
       <NavBar />
-      <MediaSection
-        title="Top Movies"
-        items={movies.slice(0, 4)}
-        type="movie"
-      />
-      <MediaSection
-        title="Top TV Shows"
-        items={tvShows.slice(0, 4)}
-        type="tv"
-      />
-      <MediaSection
-        title="Top Books"
-        items={books.slice(0, 4)}
-        type="book"
-      />
+      <MediaSection title="Top Movies" items={movies} type="movie" />
+      <MediaSection title="Top TV Shows" items={tvShows} type="tv" />
+      <MediaSection title="Top Books" items={books} type="book" />
     </div>
   );
 };
