@@ -2,8 +2,6 @@
   {
     "type": "movie",
     "name": "Inception",
-    "creator": "Christopher Nolan",
-    "description": "A skilled thief leads a team into dreams to steal secrets.",
     "genre": "Sci-Fi"
   },
   {

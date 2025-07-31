@@ -1,8 +1,10 @@
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-export const fetchTMDBPoster = async (title, type = 'movie') => {
-  const searchType = type === 'movie' ? 'movie' : 'tv';
-  const url = `https://api.themoviedb.org/3/search/${searchType}?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}`;
+export const fetchTMDBPoster = async (title, type = "movie") => {
+  const searchType = type === "movie" ? "movie" : "tv";
+  const url = `https://api.themoviedb.org/3/search/${searchType}?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(
+    title
+  )}`;
 
   try {
     const res = await fetch(url);
@@ -10,25 +12,65 @@ export const fetchTMDBPoster = async (title, type = 'movie') => {
     console.log(`[TMDB] ${type} - ${title}`, data);
     const result = data.results?.[0];
 
-    if (result && result.poster_path) {
+    if (!result) {
       return {
-        posterUrl: `https://image.tmdb.org/t/p/w500${result.poster_path}`,
-        rating: result.vote_average?.toFixed(1) ?? 'N/A'
+        posterUrl: "",
+        rating: "N/A",
+        description: "N/A",
+        creator: "N/A",
       };
     }
 
-    return { posterUrl: '', rating: 'N/A' };
+    const detailsUrl = `https://api.themoviedb.org/3/${searchType}/${result.id}?api_key=${TMDB_API_KEY}`;
+    const creditsUrl = `https://api.themoviedb.org/3/${searchType}/${result.id}/credits?api_key=${TMDB_API_KEY}`;
+
+    const [detailsRes, creditsRes] = await Promise.all([
+      fetch(detailsUrl),
+      fetch(creditsUrl),
+    ]);
+
+    const details = await detailsRes.json();
+    const credits = await creditsRes.json();
+
+    const description = details.overview || "N/A";
+
+    let creator = "N/A";
+
+    if (type === "tv") {
+      creator = details.created_by?.[0]?.name || "N/A";
+    } else if (type === "movie") {
+      const director = credits.crew?.find((c) => c.job === "Director");
+      creator = director?.name || "N/A";
+    }
+
+    const finalData = {
+      posterUrl: result.poster_path
+        ? `https://image.tmdb.org/t/p/w500${result.poster_path}`
+        : '',
+      rating: result.vote_average?.toFixed(1) ?? 'N/A',
+      description,
+      creator,
+    };
+
+    console.log(`[TMDB FINAL DATA] ${type} - ${title}:`, finalData);
+    return finalData;
   } catch (err) {
-    console.error('TMDB fetch error:', err);
-    return { posterUrl: '', rating: 'N/A' };
+    console.error('[TMDB ERROR]:', err);
+    return {
+      posterUrl: '',
+      rating: 'N/A',
+      description: 'N/A',
+      creator: 'N/A',
+    };
   }
 };
-
 
 export const fetchBookCover = async (title, author) => {
   try {
     const response = await fetch(
-      `https://openlibrary.org/search.json?title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}`
+      `https://openlibrary.org/search.json?title=${encodeURIComponent(
+        title
+      )}&author=${encodeURIComponent(author)}`
     );
     const data = await response.json();
 
@@ -63,4 +105,3 @@ export const fetchBookCover = async (title, author) => {
     };
   }
 };
-

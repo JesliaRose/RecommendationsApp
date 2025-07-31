@@ -5,15 +5,20 @@ import "../styles/MediaCard.css";
 const MediaCard = ({ title, person, genre, description, posterUrl, type }) => {
   const [poster, setPoster] = useState(posterUrl || "");
   const [rating, setRating] = useState("N/A");
+  const [creator, setCreator] = useState(person);
+  const [desc, setDesc] = useState(description);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!posterUrl) {
         console.log("Searching TMDB for:", title);
         if (type === "movie" || type === "tv") {
-          const { posterUrl, rating } = await fetchTMDBPoster(title, type);
+          const { posterUrl, rating, description, creator } =
+            await fetchTMDBPoster(title, type);
           setPoster(posterUrl);
           setRating(rating);
+          setDesc(description);
+          setCreator(creator);
         } else if (type === "book") {
           console.log("Book Info:", { title, person, type });
           const { posterUrl, rating } = await fetchBookCover(title, person);
@@ -37,9 +42,9 @@ const MediaCard = ({ title, person, genre, description, posterUrl, type }) => {
       <div className="media-details">
         <h3 className="media-title">{title}</h3>
         <p className="media-person">
-          {type === "book" ? "Author" : "Director"}: <span>{person}</span>
+          {type === "book" ? "Author" : "Director"}: <span>{creator}</span>
         </p>
-        <p className="media-description">{description}</p>
+        <p className="media-description">{desc}</p>
         <div className="media-info-row">
           <p className="media-rating">Rating: {rating}</p>
           <p className="media-genre">{genre}</p>
