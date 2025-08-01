@@ -24,7 +24,7 @@ const genres = [
   "History",
 ];
 
-const recommendationsDB = {
+/* const recommendationsDB = {
   "Movies:Fiction": [
     {
       title: "Inception",
@@ -63,52 +63,95 @@ const recommendationsDB = {
       type: "tv",
     },
   ],
-};
+}; */
+
+
 
 export default function SelectInterests() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
+  const navigate = useNavigate();
 
-  const toggleSelection = (item, setSelected, selected) => {
-    setSelected(
-      selected.includes(item)
-        ? selected.filter((i) => i !== item)
-        : [...selected, item]
+  const handleCategoryClick = (category) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleGenreClick = (genre) => {
+    setSelectedGenres((prev) =>
+      prev.includes(genre)
+        ? prev.filter((g) => g !== genre)
+        : [...prev, genre]
+    );
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = {
-      categories: selectedCategories,
-      genres: selectedGenres,
-    };
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to get recommendations.");
+      return;
+    }
 
-    console.log("Selected:", data);
-    localStorage.setItem("userPreferences", JSON.stringify(data));
+    if (selectedCategories.length !== 1) {
+    alert("Please select exactly one category for recommendations.");
+    return;
+  }
 
-    const collected = [];
+  const categoryMap = {
+    "Movies": { type: "movie", url: "https://dev2004v-content-detection-backend.hf.space/recommend/movies" },
+    "TV Shows": { type: "tv", url: "https://dev2004v-content-detection-backend.hf.space/recommend/tvshowrec" },
+    "Books": { type: "book", url: "https://dev2004v-content-detection-backend.hf.space/recommend/book" },
+  };
 
-    selectedCategories.forEach((cat) => {
-      selectedGenres.forEach((genre) => {
-        const key = `${cat}:${genre}`;
-        if (recommendationsDB[key]) {
-          collected.push(...recommendationsDB[key]);
-        }
-      });
+  const selectedCategory = selectedCategories[0];
+  const mapped = categoryMap[selectedCategory];
+
+  if (!mapped) {
+    alert("Unsupported category selected.");
+    return;
+  }
+
+  try {
+    const response = await fetch(mapped.url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        type: mapped.type,
+        genre: selectedGenres.join(","),
+        top_k: 10,
+      }),
     });
 
-    setRecommendations(collected);
-    setShowRecommendations(true);
+    const data = await response.json();
 
-    const handleBack = () => {
-      setShowRecommendations(false);
-      setRecommendations([]);
-    };
-  };
+    if (response.ok && data.status === "success") {
+      const formatted = data.recommendations.map((item) => ({
+        title: item.name,
+        person: item.creator,
+        genre: item.genre,
+        type: item.type,
+      }));
+
+      setRecommendations(formatted);
+      setShowRecommendations(true);
+    } else {
+      alert(data.error || "Failed to fetch recommendations.");
+    }
+  } catch (err) {
+    console.error("❌ Error fetching recommendations", err);
+    alert("Something went wrong.");
+  }
+};
 
   return (
     <div className="interests-container">
@@ -127,12 +170,7 @@ export default function SelectInterests() {
                     selectedCategories.includes(cat) ? "selected" : ""
                   }`}
                   onClick={() =>
-                    toggleSelection(
-                      cat,
-                      setSelectedCategories,
-                      selectedCategories
-                    )
-                  }
+                    handleCategoryClick(cat)}
                 >
                   {cat}
                 </button>
@@ -151,7 +189,7 @@ export default function SelectInterests() {
                     selectedGenres.includes(genre) ? "selected" : ""
                   }`}
                   onClick={() =>
-                    toggleSelection(genre, setSelectedGenres, selectedGenres)
+                    handleGenreClick(genre)
                   }
                 >
                   {genre}

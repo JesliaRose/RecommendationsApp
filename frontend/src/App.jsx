@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Signup from "./pages/SignUp.jsx";
 import SelectInterests from "./pages/SelectInterests.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import Login from "./pages/login.jsx";
@@ -20,6 +21,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/signup" element={<Signup/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/interests" element={<SelectInterests />} />
       <Route path="/home" element={<Home />} />
