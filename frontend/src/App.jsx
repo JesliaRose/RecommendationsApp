@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import Signup from "./pages/SignUp.jsx";
+import Login from "./pages/LoginPage.jsx";
 import SelectInterests from "./pages/SelectInterests.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
-import Login from "./pages/login.jsx";
+//import Login from "./pages/login.jsx";
 import Home from "./pages/Home.jsx";
 import content from "./data/content.json";
 import AllMovies from "./components/AllMovies.jsx";

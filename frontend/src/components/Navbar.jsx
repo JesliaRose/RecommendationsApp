@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faU, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const username = user?.username || "Guest";
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <nav
       style={{
@@ -57,18 +69,32 @@ export default function Navbar() {
             </Link>
           </li>
         </ul>
-
-        <Link to="/profile">
-          <div
-            style={{
-              width: "35px",
-              height: "35px",
-              borderRadius: "50%",
-            }}
-          >
-            <FontAwesomeIcon icon={faUser} size="xl" style={{color: "#ffffff",}} />
+        <div
+          className="profile-data"
+          style={{ display: "flex", alignItems: "center", gap: "20px" }}
+        >
+          <Link to="/profile">
+            <div
+              style={{
+                width: "auto",
+                height: "35px",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center"
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faUser}
+                size="xl"
+                style={{ color: "#ffffff" }}
+              />
+              <p style={{color: "white"}}>{username}</p>
+            </div>
+          </Link>
+          <div>
+            <button onClick={handleLogout}>Logout</button>
           </div>
-        </Link>
+        </div>
       </div>
     </nav>
   );

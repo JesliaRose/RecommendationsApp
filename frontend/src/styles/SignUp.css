@@ -1,4 +1,4 @@
-.signup-form{
+.signup-form, .login-form{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -7,7 +7,7 @@
     border-radius: 20px;
 }
 
-.signup-form input{
+.signup-form input, .login-form input{
     background-color: aliceblue;
     border-radius: 20px;
     height: 20px;
@@ -17,11 +17,11 @@
     margin-bottom: 10px;
 }
 
-.signup-form button{
+.signup-form button, .login-form button{
     background-color: #A06CD5;
 }
 
-.signup-form button:hover{
+.signup-form button:hover, .login-form button:hover{
     cursor: pointer;
     background-color: #6247AA;
 }

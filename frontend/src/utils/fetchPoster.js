@@ -106,7 +106,7 @@ export const fetchBookCover = async (title, author) => {
 
     // Build poster URL
     const posterUrl = firstMatch.cover_i
-      ? `https://covers.openlibrary.org/b/id/${firstMatch.cover_i}-L.jpg`
+      ? `https://covers.openlibrary.org/b/id/${firstMatch.cover_i}-M.jpg`
       : "";
 
     console.log("🖼️ Poster URL:", posterUrl);
