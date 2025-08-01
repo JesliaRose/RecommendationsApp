@@ -110,7 +110,7 @@ const LandingPage = () => {
 
             <div className="hero-actions">
               <button className="primary-button">
-                <Link to="/login" className="to-login">
+                <Link to="/signup" className="to-login">
                   <span>Start Discovering</span>
                 </Link>
                 <ArrowRight size={20} />

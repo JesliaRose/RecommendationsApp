@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/SignUp.css";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -50,7 +51,8 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSignup}>
+    <form onSubmit={handleSignup} className="signup-form">
+        <h2>Create a new Account</h2>
       <input
         type="text"
         value={username}
